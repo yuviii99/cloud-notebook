@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 
-const Signup = () => {
+const Signup = (props) => {
   const [credentials, setCredentials] = useState({name: "", email: "", password: "", cpassword: ""});
 
   const handleSubmit = async(e)=>{
@@ -16,9 +16,10 @@ const Signup = () => {
     const json = await response.json();
     if(json.success){
       localStorage.setItem('token', json.authToken);
+      props.showAlert("Successful", "success");
     }
     else{
-      alert("Invalid Creds")
+      props.showAlert("Invalid creds", "danger")
     }
   }
 
